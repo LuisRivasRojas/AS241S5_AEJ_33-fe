@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="history-header">
+    <h2>📋 Historial de Consultas</h2>
+    <button (click)="load()">🔄 Actualizar</button>
+  </div>
+
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="!loading && records.length === 0">No hay registros.</div>
+
+  <div *ngFor="let r of records" class="record" [class.error-record]="r.status === 'ERROR'">
+    <div class="record-header">
+      <span class="badge" [class.badge-chat]="r.apiProvider === 'CHATGPT_42'" [class.badge-translate]="r.apiProvider === 'DEEP_TRANSLATE'">
+        {{ r.apiProvider }}
+      </span>
+      <small>{{ r.timestamp | date:'dd/MM/yyyy HH:mm' }}</small>
+      <span class="status" [class.success]="r.status === 'SUCCESS'" [class.error]="r.status === 'ERROR'">
+        {{ r.status }}
+      </span>
+    </div>
+
+    <div *ngIf="editingId !== r.id">
+      <p><strong>Prompt:</strong> {{ r.prompt }}</p>
+      <p><strong>Respuesta:</strong> {{ r.response || r.errorMessage }}</p>
+      <div class="record-actions">
+        <button class="btn-edit" (click)="startEdit(r)">✏️ Editar</button>
+        <button class="btn-delete" (click)="delete(r.id!)">🗑️ Eliminar</button>
+      </div>
+    </div>
+
+    <div *ngIf="editingId === r.id" class="edit-form">
+      <textarea [(ngModel)]="editPrompt" rows="3"></textarea>
+      <div class="edit-actions">
+        <button class="btn-save" (click)="saveEdit(r.id!)">💾 Guardar</button>
+        <button class="btn-cancel" (click)="cancelEdit()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

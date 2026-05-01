@@ -1,0 +1,29 @@
+<div class="card">
+  <h2>🌐 Traductor - Deep Translate</h2>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Idioma origen</label>
+      <select [(ngModel)]="source">
+        <option *ngFor="let lang of languages" [value]="lang.code">{{ lang.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Idioma destino</label>
+      <select [(ngModel)]="target">
+        <option *ngFor="let lang of languages.slice(1)" [value]="lang.code">{{ lang.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <textarea [(ngModel)]="prompt" placeholder="Texto a traducir..." rows="4"></textarea>
+  </div>
+  <button (click)="translate()" [disabled]="loading">
+    {{ loading ? 'Traduciendo...' : 'Traducir' }}
+  </button>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="result" class="result">
+    <p><strong>Traducción:</strong></p>
+    <p>{{ result.response }}</p>
+    <small>{{ result.responseTimeMs }}ms | {{ result.status }}</small>
+  </div>
+</div>

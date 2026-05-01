@@ -1,0 +1,15 @@
+<div class="card">
+  <h2>💬 Chat con Llama 3.3 70b</h2>
+  <div class="form-group">
+    <textarea [(ngModel)]="prompt" placeholder="Escribe tu pregunta..." rows="4"></textarea>
+  </div>
+  <button (click)="send()" [disabled]="loading">
+    {{ loading ? 'Enviando...' : 'Enviar' }}
+  </button>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="result" class="result">
+    <p><strong>Respuesta:</strong></p>
+    <p>{{ result.response }}</p>
+    <small>{{ result.responseTimeMs }}ms | {{ result.status }}</small>
+  </div>
+</div>
