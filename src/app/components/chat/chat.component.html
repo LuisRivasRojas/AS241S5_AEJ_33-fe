@@ -1,6 +1,7 @@
 <div class="card">
-  <h2>💬 Chat con Llama 3.3 70b</h2>
+  <h2>Chat — Llama 3.3 70b</h2>
   <div class="form-group">
+    <label>Mensaje</label>
     <textarea [(ngModel)]="prompt" placeholder="Escribe tu pregunta..." rows="4"></textarea>
   </div>
   <button (click)="send()" [disabled]="loading">
@@ -8,8 +9,8 @@
   </button>
   <div *ngIf="error" class="error">{{ error }}</div>
   <div *ngIf="result" class="result">
-    <p><strong>Respuesta:</strong></p>
+    <p class="result-label">Respuesta</p>
     <p>{{ result.response }}</p>
-    <small>{{ result.responseTimeMs }}ms | {{ result.status }}</small>
+    <small>{{ result.responseTimeMs }}ms &nbsp;|&nbsp; {{ result.status }}</small>
   </div>
 </div>

@@ -32,13 +32,18 @@ export class ApiService {
     return this.http.get<AiResponse[]>(`${this.base}/history/${provider}`);
   }
 
-  // UPDATE
-  update(id: string, prompt: string): Observable<AiResponse> {
-    return this.http.put<AiResponse>(`${this.base}/history/${id}`, { prompt });
+  // UPDATE - Chat (re-consulta la IA)
+  updateChat(id: string, prompt: string): Observable<AiResponse> {
+    return this.http.put<AiResponse>(`${this.base}/history/chat/${id}`, { prompt });
   }
 
-  // DELETE lógico
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.base}/history/${id}`);
+  // UPDATE - Translate (re-traduce)
+  updateTranslate(id: string, prompt: string, source: string, target: string): Observable<AiResponse> {
+    return this.http.put<AiResponse>(`${this.base}/history/translate/${id}`, { prompt, source, target });
+  }
+
+  // DELETE
+  delete(id: string, provider: string): Observable<void> {
+    return this.http.delete<void>(`${this.base}/history/${id}?provider=${provider}`);
   }
 }
