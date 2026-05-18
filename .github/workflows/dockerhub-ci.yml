@@ -41,5 +41,3 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_LUIS }}/as241s5_aej_33-fe-nosql:latest
             ${{ secrets.DOCKERHUB_LUIS }}/as241s5_aej_33-fe-nosql:${{ github.sha }}
-
-# Comentario para ejecutar el Pipeline
